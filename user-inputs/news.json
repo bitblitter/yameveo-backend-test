@@ -1,0 +1,25 @@
+{
+  "news": [
+    {
+      "id": "yameveo-hiring",
+      "name": "Yameveo is hiring!",
+      "text": "text version of yameveo-hiring new",
+      "html": "<p>html version of yameveo-hiring new</p>",
+      "tags": ["yameveo", "hiring"]
+    },
+    {
+      "id": "barcelona-new-silicon-valley",
+      "name": "Barcelona, the new silicon valley",
+      "text": "text version of barcelona-new-silicon-valley new",
+      "html": "<p>html version of barcelona-new-silicon-valley new</p>",
+      "tags": ["barcelona", "silicon valley"]
+    },
+    {
+      "id": "barcelona-renews-leo-messi",
+      "name": "Barcelona renews Leo Messi contract",
+      "text": "text version of barcelona-renews-leo-messi new",
+      "html": "<p>html version of barcelona-renews-leo-messi new</p>",
+      "tags": ["barcelona", "leo messi"]
+    }
+  ]
+}
