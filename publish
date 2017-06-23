@@ -1,0 +1,42 @@
+#!/usr/bin/php
+<?php
+require __DIR__.'/src/autoload.php';
+use yameveo\App;
+
+// See the App class definition for detailed info on the settings.
+$settings = array(
+    'dataDir' => __DIR__.'/user-inputs/',
+    'dataFile' => 'news.json',
+    'clientSettings' => array(
+        'defaultSerializer' => 'xml',
+        'serializers' => array(
+            'json' => '\yameveo\news\serializer\JSONSerializer',
+            'xml' => '\yameveo\news\serializer\XMLSerializer',
+            'csv' => '\yameveo\news\serializer\CSVSerializer'
+        )
+    ),
+    'repositorySettings' => array(),
+    'defaultReader' => 'json',
+    'readers' => array(
+        'json' => '\yameveo\news\reader\JSONReader'
+    )
+);
+
+
+
+// show usage help if called without arguments.
+if(count($argv) === 1){
+    exit("Usage: ${argv[0]} <itemId> <writeFormat> <readFormat>\n" .
+        "readFormat and WriteFormat are optional, and default to json \n");
+}
+
+// define which command line arguments to pass 
+list($scriptName, $itemId, $writeFormat, $readFormat) = array_pad($argv, 4, null);
+
+try {
+    $app = new App($settings);
+    $app->publish($itemId, $readFormat, $writeFormat)."\n";
+    exit("Published successfuly.\n");
+} catch(\Exception $e) {
+    exit("Error: ".$e->getMessage()."\n");
+}
