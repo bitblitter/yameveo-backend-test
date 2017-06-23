@@ -1,3 +1,43 @@
+**requirements**
+* PHP 7
+* Composer
+
+**Before running**
+* Run composer install in the directory
+````bash
+    composer install
+````
+
+* set publish to be executable:
+
+````bash
+    chmod u+x publish
+````
+**Running the application**
+* Execute the publish command:
+````bash
+    ./publish < news item id >  [< format >]
+````
+*< format >* can be json, xml or csv
+
+**Running the unit tests**
+````bash
+    vendor/phpunit/phpunit/phpunit
+````
+
+
+**Design notes**
+* I implemented interfaces in the base yameveo directory, and their implementations in other namespaces.
+It could be cleaner, but I think it's simpler this way for this specific test.
+
+* The app is configured via a PHP array in the publish script, it could be easily moved to an external file.
+
+* I didn't use any framework, to keep the code simple and dependencies at a minimum.
+
+
+
+
+
 We’re a news publisher platform. Our app allow our customers to directly input news and publish them into other external platforms. 
 Write a command line script that publishes the news that have been previously uploaded by the user.
 
