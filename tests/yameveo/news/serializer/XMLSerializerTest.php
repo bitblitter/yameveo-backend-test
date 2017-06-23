@@ -1,11 +1,11 @@
 <?php
+namespace yameveo\news\serializer;
+
 use PHPUnit\Framework\TestCase;
 use yameveo\news\Item;
-use yameveo\news\serializer\JSONSerializer;
 
-
-final class JSONSerializerTest extends TestCase {
-
+class XMLSerializerTest extends TestCase
+{
     private function getItemData() {
         return array(
             'id' => 'item-id',
@@ -25,12 +25,26 @@ final class JSONSerializerTest extends TestCase {
         return $item;
     }
 
-    public function testSerializeItem() {
+    public function testSerializeItem()
+    {
         $mockItem = $this->getMockItem();
-        $serializer = new JSONSerializer();
+        $serializer = new XMLSerializer();
 
-        $expectedValue = json_encode($this->getItemData(), JSON_PRETTY_PRINT);
-        $givenValue = $serializer->serializeItem($mockItem);
+        $expectedValue = <<<EOX
+<?xml version="1.0"?>
+<root>
+    <id>item-id</id>
+    <name>fake item</name>
+    <tags>
+        <element>just</element>
+        <element>a</element>
+        <element>few</element>
+        <element>tags</element>
+    </tags>
+</root>
+EOX;
+        $expectedValue = preg_replace('/\s/', '', $expectedValue);
+        $givenValue = preg_replace('/\s/', '', $serializer->serializeItem($mockItem));
 
         $this->assertEquals($expectedValue, $givenValue);
     }

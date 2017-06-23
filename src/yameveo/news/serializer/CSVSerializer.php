@@ -26,19 +26,21 @@ class CSVSerializer implements Serializer {
     }
 
     private function getCSVFor($data){
-        $csv = fopen('php://temp/', 'w');
         $dataLine = array_values($data);
         $dataColumns = array_keys($data);
         $result = array();
         $result[] = $this->outputCSV($dataColumns);
         $result[] = $this->outputCSV($dataLine);
 
-        return implode("\n", $result);
+        return implode("", $result);
     }
 
     private function outputCSV($array){
-        $fp = fopen('php://output', 'w');
+        $fp = fopen('php://temp', 'r+');
         fputcsv($fp, $array);
+        rewind($fp);
+        $csv = fgets($fp);
         fclose($fp);
+        return $csv;
     }
 }
